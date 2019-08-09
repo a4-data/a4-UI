@@ -1,0 +1,126 @@
+<ext-panel flex="1" bodyPadding="0">
+  <!-- layout="fit"  Titlebar starts-->
+  <ext-titlebar flex="1" docked="top" weight="10">
+    <!-- <ext-button iconCls="x-fa fa-bars" onTap="main.toggleTree"></ext-button> -->
+    <!-- <span class="ext ext-sencha" style="margin: '0 5px 0 7px;'; font-size: '20px'; width: '20px'"></span> -->
+    <span id="theTitle" href="#" class="app-title">A4 Data</span>
+    <!-- <ext-container align="right" onready="main.readyRightContainer"></ext-container> -->
+    <ext-container align="right">
+      <span href="#" style="float: right;"><i class="fas fa-user"></i> Profile</span>
+
+    </ext-container>
+  </ext-titlebar>
+  <!-- Titlebar ends-->
+
+  <ext-toolbar flex="1" docked="top" weight="10" padding="0">
+    <!-- Breadcrumb starts-->
+    <ext-breadcrumbbar showIcons="true" onready="main.readyDataviewBreadcrumb" onChange="main.dataviewBreadcrumbClick"
+      useSplitButtons="true" width="100%" height="100%">
+    </ext-breadcrumbbar>
+    <ext-button weight="5" hidden=true onready="main.readyCodeButton" ui="fab" iconCls="x-font-icon md-icon-code"
+      right="15" zIndex="10000" ontap="main.toggleCode">
+    </ext-button>
+  </ext-toolbar>
+  <!-- Navtree starts-->
+  <ext-panel flex="1" docked="left" border="true" shadow="true" scrollable="y"
+    resizable='{"edges": "east", "dynamic": "true"}' header="false" collapsible='{"direction": "left"}'
+    collapsed="false" width="275px" onready="main.readyNavTreePanel">
+    <ext-searchfield flex="1" docked="top" ui="faded" margin="7px" onchange="main.filterNav">
+    </ext-searchfield>
+    <ext-treelist ui="nav" expanderFirst="false" expanderOnly="true" selectOnExpander="true"
+      onready="main.readyNavTreelist" onselectionchange="main.navTreelistSelectionChange">
+    </ext-treelist>
+  </ext-panel>
+
+  <ext-container flex="1">
+    <ext-button iconCls="x-fa fa-bars" onTap="main.toggleTree"></ext-button>
+  </ext-container>
+  <ext-panel>
+    <div
+      style="display:inline-flex;height: 120px; align-items: center;text-align: center; margin-left: 110px; background-color:snow; align-content: center;">
+      <div style="border-right: grey 1px solid;padding: 6px 10px;height: 60px;">
+        <ext-button text="Start Session" class="btn" shadow="true"></ext-button>
+      </div>
+      <div style="padding: 12px 20px; width: 600px; display: inline-flex; height: fit-content;">
+        <div>
+          <ext-searchfield ui="solo" shadow="true" placeholder="    Search" margin="0 10 0 0" triggerAlign="right"
+            triggers='{ "search": { "type": "search", "side": "right" } }'
+            style="width:750px; height: 40px; font-size: 25px; font-weight: 800">
+          </ext-searchfield>
+        </div>
+        <div style="padding-left: 5px;">
+          <ext-button iconCls="x-fa fa-arrow-right" ui="action round raised" height="36" width="36"
+            platformConfig='{ "phone": { "height": "40", "width": "40" } }'>
+          </ext-button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- -->
+      <ext-panel width="980px" style="margin-left: 135px;">
+        <ext-tabpanel flex="1" onready='main.tabpanelReady' shadow="true" height="480px"
+          defaults='{"cls": "card","layout": "center"}'>
+          <ext-panel flex="1" title="List View" layout="center">
+            <ext-container width="980px">
+              <ext-list shadow="true" scrollable="true" onselect="main.onSelect" onready="main.onListReady" height="400"
+                layout="center">
+              </ext-list>
+            </ext-container>
+          </ext-panel>
+
+          <ext-panel flex="1" title="Visual View" layout="center">
+            <ext-container padding="10" layout="fit" height="100%" width="100%" fitToParent="true">
+              <!-- <ext-toolbar docked="top" ui="app-transparent-toolbar" shadow="false" padding="0 10 0 10">
+                <chart-toolbar onItemReady="basicbar.onMenuItemReady" theme="default">
+                </chart-toolbar>
+              </ext-toolbar> -->
+              <ext-cartesian onready="main.cartesianReady" downloadServerUrl="http://svg.sencha.io" flipXY="true"
+                shadow="true" insetPadding="70 40 0">
+              </ext-cartesian>
+            </ext-container>
+
+
+          </ext-panel>
+        </ext-tabpanel>
+      </ext-panel>
+
+    </div>
+  </ext-panel>
+
+  <!-- Navtree ends-->
+  <!-- selections starts-->
+  <!-- <ext-panel scrollable="y" hidden="false" onready="main.readySelection" padding="15">
+    <ext-dataview
+      inline="true"
+      centered="true"
+      itemCls="div.app-thumbnail"
+      onchildtap="main.dataviewNavClick"
+      onready="main.readyDataviewNav"
+    >
+    </ext-dataview> 
+
+
+  </ext-panel> -->
+  <!-- selections ends-->
+
+
+  <!-- Router starts-->
+  <ext-router hidden=true onready="main.readyRouter" style="overflow:scroll;" padding="10px">
+  </ext-router>
+  <!-- Router ends-->
+  <!-- code window starts-->
+  <!-- <ext-panel docked="right" border=true shadow=true scrollable="y" width="900px" height="100%" layout="fit"
+    resizable='{"edges": "west", "dynamic": "true"}'
+    hideAnimation='{"type": "slideOut", "direction": "right", "duration": 100, "easing": "ease" }'
+    showAnimation='{"type": "slideIn", "direction": "left", "duration": 100, "easing": "ease" }' header=false
+    collapsible='{"direction": "right"}' onready="main.readyCodePanel" hidden=true collapsed=false>
+    <ext-tabpanel shadow="true" height="100%" tabConfig='{
+        "title": "Custom Title"
+        "tooltip": "A button tooltip".
+        "margin": "0 0 0 -15"
+    }' tabBarPosition="top" tabBar='{"layout": {"pack": "start"}}' onready="main.readyTabPanel">
+    </ext-tabpanel>
+  </ext-panel> -->
+  <!-- code window ends-->
+</ext-panel>
