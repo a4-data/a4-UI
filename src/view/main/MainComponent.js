@@ -17,221 +17,62 @@ Ext.define('User', {
     fields: ['id', 'name', 'year', 'pantone_value']
 });
 
-// var storee = Ext.create('Ext.data.Store', {
-//     model: 'User',
-//     proxy: {
-//         type: 'jsonp',
-//         url: 'https://reqres.in/api/products/3'
-//     }
-// });
-
-// storee.load();
-
 var storeee = Ext.create('Ext.data.Store', {
     model: 'User',
     proxy: {
         type: 'rest',
-        url: 'https://reqres.in/api/products/3'
+        url: 'https://reqres.in/api/products/5'
     }
 });
 
-storeee.load(function (heck) {
-    console.log(heck[0].data.data)
-}); //GET /users
-// User.load({
-//     success: function (user) {
-//         console.log('i am here', user)
-//         console.log(user.getId()); //outputs 123
-//     }
-// });
-// Ext.define('Person', {
+// Ext.define('Userstore', {
 //     extend: 'Ext.data.Model',
-//     fields: [{
-//         name: 'id',
-//         type: 'int',
-//         useNull: true
-//     }, 'email', 'first', 'last'],
-//     validations: [{
-//         type: 'length',
-//         field: 'email',
-//         min: 1
-//     }, {
-//         type: 'length',
-//         field: 'first',
-//         min: 1
-//     }, {
-//         type: 'length',
-//         field: 'last',
-//         min: 1
-//     }]
+//     fields: ['name', 'email', 'phone']
+// });
+// var Id = document.getElementById('gridId')
+// var userStore = Ext.create('Ext.data.Store', {
+//     model: 'Userstore',
+//     data: [
+//         { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+//         { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+//         { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+//         { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+//     ]
 // });
 
-// var MyApp = function () {
-//     return {
-//         init: function () {
-//             console.log('Init Called******************');
-//             var storeys = Ext.create('Ext.data.Store', {
-//                 autoLoad: true,
-//                 autoSync: true,
-//                 // model: 'Person',
-//                 proxy: {
-//                     type: 'rest',
-//                     // url: 'https://reqres.in/api/users',
-//                     url: 'https://reqres.in/api/products/3',
-//                     reader: {
-//                         type: 'json',
-//                         rootProperty: 'data'
-//                     },
-//                     writer: {
-//                         type: 'json'
-//                     }
-//                 },
-//                 listeners: {
-//                     write: function (storeys, operation) {
-//                         console.log('write_________________________');
-//                         console.log(operation, 'write_________________________');
+// Ext.create('Ext.grid.Grid', {
+//     renderTo: Id,
+//     store: userStore,
 
-//                     }
-//                     // write: function (store, operation) {
-//                     //     var record = operation.getRecords()[0],
-//                     //         name = Ext.String.capitalize(operation.action),
-//                     //         verb;
-
-
-//                     //     if (name == 'Destroy') {
-//                     //         record = operation.records[0];
-//                     //         verb = 'Destroyed';
-//                     //     } else {
-//                     //         verb = name + 'd';
-//                     //     }
-//                     //     Ext.example.msg(name, Ext.String.format("{0} user: {1}", verb, record.getId()));
-
-//                     // }
-//                 }
-//             })
-//             // storeys.write();
-//             storeys.getId()
-//             console.log();
-//         }
-//     }
-// }();
-// Ext.onReady(MyApp.init, MyApp);
-
-// Ext.onReady(function () {
-
-//     var store = Ext.create('Ext.data.Store', {
-//         autoLoad: true,
-//         autoSync: true,
-//         model: 'Person',
-//         proxy: {
-//             type: 'rest',
-//             // url: 'https://reqres.in/api/users',
-//             url: 'https://reqres.in/api/products/3',
-//             reader: {
-//                 type: 'json',
-//                 root: 'data'
-//             },
-//             writer: {
-//                 type: 'json'
-//             }
+//     title: 'Application Users',
+//     columns: [
+//         {
+//             text: 'Name',
+//             width: 100,
+//             sortable: false,
+//             hideable: false,
+//             dataIndex: 'name'
 //         },
-//         listeners: {
-//             write: function (store, operation) {
-//                 var record = operation.getRecords()[0],
-//                     name = Ext.String.capitalize(operation.action),
-//                     verb;
-
-
-//                 if (name == 'Destroy') {
-//                     record = operation.records[0];
-//                     verb = 'Destroyed';
-//                 } else {
-//                     verb = name + 'd';
-//                 }
-//                 Ext.example.msg(name, Ext.String.format("{0} user: {1}", verb, record.getId()));
-
-//             }
-//         }
-//     });
-
-//     var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
-//         listeners: {
-//             cancelEdit: function (rowEditing, context) {
-//                 // Canceling editing of a locally added, unsaved record: remove it
-//                 if (context.record.phantom) {
-//                     store.remove(context.record);
-//                 }
-//             }
-//         }
-//     });
-
-//     var grid = Ext.create('Ext.grid.Panel', {
-//         renderTo: document.body,
-//         plugins: [rowEditing],
-//         width: 400,
-//         height: 300,
-//         frame: true,
-//         title: 'Users',
-//         store: store,
-//         iconCls: 'icon-user',
-//         columns: [{
-//             text: 'ID',
-//             width: 40,
-//             sortable: true,
-//             dataIndex: 'id'
-//         }, {
-//             text: 'Email',
-//             flex: 1,
-//             sortable: true,
+//         {
+//             text: 'Email Address',
+//             width: 150,
 //             dataIndex: 'email',
-//             field: {
-//                 xtype: 'textfield'
-//             }
-//         }, {
-//             header: 'First',
-//             width: 80,
-//             sortable: true,
-//             dataIndex: 'first',
-//             field: {
-//                 xtype: 'textfield'
-//             }
-//         }, {
-//             text: 'Last',
-//             width: 80,
-//             sortable: true,
-//             dataIndex: 'last',
-//             field: {
-//                 xtype: 'textfield'
-//             }
-//         }],
-//         dockedItems: [{
-//             xtype: 'toolbar',
-//             items: [{
-//                 text: 'Add',
-//                 iconCls: 'icon-add',
-//                 handler: function () {
-//                     // empty record
-//                     store.insert(0, new Person());
-//                     rowEditing.startEdit(0, 0);
-//                 }
-//             }, '-', {
-//                 itemId: 'delete',
-//                 text: 'Delete',
-//                 iconCls: 'icon-delete',
-//                 disabled: true,
-//                 handler: function () {
-//                     var selection = grid.getView().getSelectionModel().getSelection()[0];
-//                     if (selection) {
-//                         store.remove(selection);
-//                     }
-//                 }
-//             }]
-//         }]
-//     });
-//     grid.getSelectionModel().on('selectionchange', function (selModel, selections) {
-//         grid.down('#delete').setDisabled(selections.length === 0);
-//     });
+//             hidden: true
+//         },
+//         {
+//             text: 'Phone Number',
+//             flex: 1,
+//             dataIndex: 'phone'
+//         }
+//     ]
 // });
+
+storeee.load(function (heck) {
+    console.log('data', heck[0].data.data)
+});
+
+
+
 
 
 export default class MainComponent {
@@ -329,12 +170,20 @@ export default class MainComponent {
         });
     }
 
+
+    /*
+        color: "#BF1932"
+        id: 3
+        name: "true red"
+        pantone_value: "19-1664"
+        year: 2002
+    */
     onListReady = (event) => {
         this.listCmp = event.detail.cmp;
         const tpl =
             `<div>
-                <div style="font-size:16px;margin-bottom:5px;">{first_name} {last_name}</div>
-                <div style="font-size:12px;color:#666;">{title}</div>
+                <div style="font-size:16px;margin-bottom:5px;">Name:{data.name}, Year:{data.year}</div>
+                <div style="font-size:12px;color:#666;">Color:{data.color}, Id:{data.id}, P-Value:{data.pantone_value}</div>
             </div>`;
 
         this.store = Ext.create('Ext.data.Store', {
@@ -346,8 +195,22 @@ export default class MainComponent {
             sorters: ['last_name', 'first_name']
         });
 
+        Ext.define('Userss', {
+            extend: 'Ext.data.Model',
+            fields: ['id', 'name', 'year', 'pantone_value']
+        });
+
+        var storeee = Ext.create('Ext.data.Store', {
+            autoLoad: true,
+            model: 'Userss',
+            proxy: {
+                type: 'rest',
+                url: 'https://reqres.in/api/products/5'
+            }
+        });
+
         this.listCmp.setItemTpl(tpl);
-        this.listCmp.setStore(this.store);
+        this.listCmp.setStore(storeee);
     }
 
 
